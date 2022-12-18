@@ -13,7 +13,7 @@ namespace ProjetFinal.Classes
         //Attributs privés
         private string pnomUtilisateur;
         private string pmotDePasse;
-        private bool pvip;
+        private int pSolde;
 
         //Propriétés des attributs privées
         public string NomUtilisateur
@@ -28,12 +28,18 @@ namespace ProjetFinal.Classes
             set { pmotDePasse = value; }
         }
 
+        public int Solde
+        {
+            get { return pSolde; }
+            set { pSolde = value; }
+        }
 
         //Constructeurs de la classe
-        public Client(string NomUtilisateur = "", string MotDePasse = "")
+        public Client(string NomUtilisateur = "", string MotDePasse = "", int Solde = 0)
         {
             this.NomUtilisateur = NomUtilisateur;
             this.MotDePasse = MotDePasse;
+            this.Solde = Solde;
         }
     }
 }

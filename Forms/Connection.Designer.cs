@@ -47,6 +47,7 @@
             this.gbxDeconenction = new System.Windows.Forms.GroupBox();
             this.lblDeconnection = new System.Windows.Forms.Label();
             this.btnDeconnection = new System.Windows.Forms.Button();
+            this.checkVIP = new System.Windows.Forms.CheckBox();
             this.gbxConnection.SuspendLayout();
             this.gbxCreation.SuspendLayout();
             this.gbxDeconenction.SuspendLayout();
@@ -144,6 +145,7 @@
             // 
             // gbxCreation
             // 
+            this.gbxCreation.Controls.Add(this.checkVIP);
             this.gbxCreation.Controls.Add(this.btnCreer);
             this.gbxCreation.Controls.Add(this.txtNomCreer);
             this.gbxCreation.Controls.Add(this.label3);
@@ -160,7 +162,7 @@
             // btnCreer
             // 
             this.btnCreer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCreer.Location = new System.Drawing.Point(96, 179);
+            this.btnCreer.Location = new System.Drawing.Point(83, 190);
             this.btnCreer.Name = "btnCreer";
             this.btnCreer.Size = new System.Drawing.Size(146, 36);
             this.btnCreer.TabIndex = 14;
@@ -233,6 +235,17 @@
             this.btnDeconnection.TabIndex = 8;
             this.btnDeconnection.Text = "Déconnection";
             this.btnDeconnection.UseVisualStyleBackColor = true;
+            this.btnDeconnection.Click += new System.EventHandler(this.btnDeconnection_Click);
+            // 
+            // checkVIP
+            // 
+            this.checkVIP.AutoSize = true;
+            this.checkVIP.Location = new System.Drawing.Point(109, 167);
+            this.checkVIP.Name = "checkVIP";
+            this.checkVIP.Size = new System.Drawing.Size(106, 17);
+            this.checkVIP.TabIndex = 19;
+            this.checkVIP.Text = "Abonnement VIP";
+            this.checkVIP.UseVisualStyleBackColor = true;
             // 
             // Connection
             // 
@@ -279,5 +292,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtMdpCreer;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.CheckBox checkVIP;
     }
 }

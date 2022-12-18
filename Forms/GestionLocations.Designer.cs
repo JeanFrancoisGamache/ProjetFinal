@@ -37,24 +37,44 @@
             this.rbtnAZ = new System.Windows.Forms.RadioButton();
             this.btnTrier = new System.Windows.Forms.Button();
             this.btnChercher = new System.Windows.Forms.Button();
-            this.btnLouer = new System.Windows.Forms.Button();
+            this.btnReserver = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.listViewChambres = new System.Windows.Forms.ListView();
+            this.columnChambre = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnNbLitAdulte = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnNbLitEnfant = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnPrixParJour = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnChambreVIP = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnDisponibilite = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnLocataire = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabActivites = new System.Windows.Forms.TabPage();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnSalle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label3 = new System.Windows.Forms.Label();
             this.cmbHeures = new System.Windows.Forms.ComboBox();
             this.lblType = new System.Windows.Forms.Label();
             this.cmbActivite = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.tabLocationClient = new System.Windows.Forms.TabPage();
+            this.btnActualiser = new System.Windows.Forms.Button();
+            this.listViewChambreClient = new System.Windows.Forms.ListView();
+            this.columnClient = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnChambreRéserver = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnDateDébut = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnDateFin = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnPrixTotal = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btnModifier = new System.Windows.Forms.Button();
             this.rbtnVosPrix = new System.Windows.Forms.RadioButton();
             this.rbtnVosAZ = new System.Windows.Forms.RadioButton();
             this.btnTrierVosLocation = new System.Windows.Forms.Button();
             this.btnAnnuler = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.listView2 = new System.Windows.Forms.ListView();
             this.btnRetour = new System.Windows.Forms.Button();
-            this.btnModifier = new System.Windows.Forms.Button();
+            this.bntActualiserChambre = new System.Windows.Forms.Button();
             this.tabCtrlLocations.SuspendLayout();
             this.tabChambres.SuspendLayout();
             this.tabActivites.SuspendLayout();
@@ -74,13 +94,14 @@
             // 
             // tabChambres
             // 
+            this.tabChambres.Controls.Add(this.bntActualiserChambre);
             this.tabChambres.Controls.Add(this.lblNumeroChambre);
             this.tabChambres.Controls.Add(this.txtNumeroChambre);
             this.tabChambres.Controls.Add(this.rbtnPrix);
             this.tabChambres.Controls.Add(this.rbtnAZ);
             this.tabChambres.Controls.Add(this.btnTrier);
             this.tabChambres.Controls.Add(this.btnChercher);
-            this.tabChambres.Controls.Add(this.btnLouer);
+            this.tabChambres.Controls.Add(this.btnReserver);
             this.tabChambres.Controls.Add(this.label1);
             this.tabChambres.Controls.Add(this.listViewChambres);
             this.tabChambres.Location = new System.Drawing.Point(4, 22);
@@ -138,6 +159,7 @@
             this.btnTrier.TabIndex = 18;
             this.btnTrier.Text = "Trier";
             this.btnTrier.UseVisualStyleBackColor = true;
+            this.btnTrier.Click += new System.EventHandler(this.btnTrier_Click);
             // 
             // btnChercher
             // 
@@ -148,16 +170,18 @@
             this.btnChercher.TabIndex = 17;
             this.btnChercher.Text = "Chercher";
             this.btnChercher.UseVisualStyleBackColor = true;
+            this.btnChercher.Click += new System.EventHandler(this.btnChercher_Click);
             // 
-            // btnLouer
+            // btnReserver
             // 
-            this.btnLouer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLouer.Location = new System.Drawing.Point(55, 380);
-            this.btnLouer.Name = "btnLouer";
-            this.btnLouer.Size = new System.Drawing.Size(158, 36);
-            this.btnLouer.TabIndex = 16;
-            this.btnLouer.Text = "Louer";
-            this.btnLouer.UseVisualStyleBackColor = true;
+            this.btnReserver.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReserver.Location = new System.Drawing.Point(55, 380);
+            this.btnReserver.Name = "btnReserver";
+            this.btnReserver.Size = new System.Drawing.Size(158, 36);
+            this.btnReserver.TabIndex = 16;
+            this.btnReserver.Text = "Reserver";
+            this.btnReserver.UseVisualStyleBackColor = true;
+            this.btnReserver.Click += new System.EventHandler(this.btnReserver_Click);
             // 
             // label1
             // 
@@ -171,6 +195,14 @@
             // 
             // listViewChambres
             // 
+            this.listViewChambres.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnChambre,
+            this.columnNbLitAdulte,
+            this.columnNbLitEnfant,
+            this.columnPrixParJour,
+            this.columnChambreVIP,
+            this.columnDisponibilite,
+            this.columnLocataire});
             this.listViewChambres.FullRowSelect = true;
             this.listViewChambres.GridLines = true;
             this.listViewChambres.HideSelection = false;
@@ -179,9 +211,46 @@
             this.listViewChambres.Size = new System.Drawing.Size(694, 251);
             this.listViewChambres.TabIndex = 13;
             this.listViewChambres.UseCompatibleStateImageBehavior = false;
+            this.listViewChambres.View = System.Windows.Forms.View.Details;
+            // 
+            // columnChambre
+            // 
+            this.columnChambre.Text = "Numéro de chambre";
+            this.columnChambre.Width = 115;
+            // 
+            // columnNbLitAdulte
+            // 
+            this.columnNbLitAdulte.Text = "Nombre de lit adulte";
+            this.columnNbLitAdulte.Width = 111;
+            // 
+            // columnNbLitEnfant
+            // 
+            this.columnNbLitEnfant.Text = "Nombre de lit enfant";
+            this.columnNbLitEnfant.Width = 112;
+            // 
+            // columnPrixParJour
+            // 
+            this.columnPrixParJour.Text = "Prix par jour";
+            this.columnPrixParJour.Width = 80;
+            // 
+            // columnChambreVIP
+            // 
+            this.columnChambreVIP.Text = "Chambre VIP";
+            this.columnChambreVIP.Width = 86;
+            // 
+            // columnDisponibilite
+            // 
+            this.columnDisponibilite.Text = "Disponibilité";
+            this.columnDisponibilite.Width = 73;
+            // 
+            // columnLocataire
+            // 
+            this.columnLocataire.Text = "Locataire";
+            this.columnLocataire.Width = 77;
             // 
             // tabActivites
             // 
+            this.tabActivites.Controls.Add(this.listView1);
             this.tabActivites.Controls.Add(this.label3);
             this.tabActivites.Controls.Add(this.cmbHeures);
             this.tabActivites.Controls.Add(this.lblType);
@@ -193,6 +262,49 @@
             this.tabActivites.TabIndex = 2;
             this.tabActivites.Text = "Locations d\'activités";
             this.tabActivites.UseVisualStyleBackColor = true;
+            // 
+            // listView1
+            // 
+            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnSalle,
+            this.columnHeader3,
+            this.columnHeader4,
+            this.columnHeader5});
+            this.listView1.FullRowSelect = true;
+            this.listView1.GridLines = true;
+            this.listView1.HideSelection = false;
+            this.listView1.Location = new System.Drawing.Point(50, 144);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(681, 234);
+            this.listView1.TabIndex = 30;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Client";
+            this.columnHeader1.Width = 115;
+            // 
+            // columnSalle
+            // 
+            this.columnSalle.Text = "Salle réserver";
+            this.columnSalle.Width = 143;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Date réservation";
+            this.columnHeader3.Width = 145;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Date du retour";
+            this.columnHeader4.Width = 153;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "Prix total";
+            this.columnHeader5.Width = 135;
             // 
             // label3
             // 
@@ -240,13 +352,14 @@
             // 
             // tabLocationClient
             // 
+            this.tabLocationClient.Controls.Add(this.btnActualiser);
+            this.tabLocationClient.Controls.Add(this.listViewChambreClient);
             this.tabLocationClient.Controls.Add(this.btnModifier);
             this.tabLocationClient.Controls.Add(this.rbtnVosPrix);
             this.tabLocationClient.Controls.Add(this.rbtnVosAZ);
             this.tabLocationClient.Controls.Add(this.btnTrierVosLocation);
             this.tabLocationClient.Controls.Add(this.btnAnnuler);
             this.tabLocationClient.Controls.Add(this.label2);
-            this.tabLocationClient.Controls.Add(this.listView2);
             this.tabLocationClient.Location = new System.Drawing.Point(4, 22);
             this.tabLocationClient.Name = "tabLocationClient";
             this.tabLocationClient.Padding = new System.Windows.Forms.Padding(3);
@@ -254,6 +367,71 @@
             this.tabLocationClient.TabIndex = 1;
             this.tabLocationClient.Text = "Vos locations";
             this.tabLocationClient.UseVisualStyleBackColor = true;
+            // 
+            // btnActualiser
+            // 
+            this.btnActualiser.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnActualiser.Location = new System.Drawing.Point(408, 383);
+            this.btnActualiser.Name = "btnActualiser";
+            this.btnActualiser.Size = new System.Drawing.Size(167, 36);
+            this.btnActualiser.TabIndex = 30;
+            this.btnActualiser.Text = "Actualiser";
+            this.btnActualiser.UseVisualStyleBackColor = true;
+            this.btnActualiser.Click += new System.EventHandler(this.btnActualiser_Click);
+            // 
+            // listViewChambreClient
+            // 
+            this.listViewChambreClient.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnClient,
+            this.columnChambreRéserver,
+            this.columnDateDébut,
+            this.columnDateFin,
+            this.columnPrixTotal});
+            this.listViewChambreClient.FullRowSelect = true;
+            this.listViewChambreClient.GridLines = true;
+            this.listViewChambreClient.HideSelection = false;
+            this.listViewChambreClient.Location = new System.Drawing.Point(50, 110);
+            this.listViewChambreClient.Name = "listViewChambreClient";
+            this.listViewChambreClient.Size = new System.Drawing.Size(694, 251);
+            this.listViewChambreClient.TabIndex = 29;
+            this.listViewChambreClient.UseCompatibleStateImageBehavior = false;
+            this.listViewChambreClient.View = System.Windows.Forms.View.Details;
+            // 
+            // columnClient
+            // 
+            this.columnClient.Text = "Client";
+            this.columnClient.Width = 115;
+            // 
+            // columnChambreRéserver
+            // 
+            this.columnChambreRéserver.Text = "Chambre réserver";
+            this.columnChambreRéserver.Width = 143;
+            // 
+            // columnDateDébut
+            // 
+            this.columnDateDébut.Text = "Date réservation";
+            this.columnDateDébut.Width = 153;
+            // 
+            // columnDateFin
+            // 
+            this.columnDateFin.Text = "Date du retour";
+            this.columnDateFin.Width = 168;
+            // 
+            // columnPrixTotal
+            // 
+            this.columnPrixTotal.Text = "Prix total";
+            this.columnPrixTotal.Width = 181;
+            // 
+            // btnModifier
+            // 
+            this.btnModifier.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnModifier.Location = new System.Drawing.Point(229, 383);
+            this.btnModifier.Name = "btnModifier";
+            this.btnModifier.Size = new System.Drawing.Size(158, 36);
+            this.btnModifier.TabIndex = 28;
+            this.btnModifier.Text = "Modifier la location";
+            this.btnModifier.UseVisualStyleBackColor = true;
+            this.btnModifier.Click += new System.EventHandler(this.btnModifier_Click);
             // 
             // rbtnVosPrix
             // 
@@ -296,6 +474,7 @@
             this.btnAnnuler.TabIndex = 24;
             this.btnAnnuler.Text = "Annuler la location";
             this.btnAnnuler.UseVisualStyleBackColor = true;
+            this.btnAnnuler.Click += new System.EventHandler(this.btnAnnuler_Click);
             // 
             // label2
             // 
@@ -306,17 +485,6 @@
             this.label2.Size = new System.Drawing.Size(154, 25);
             this.label2.TabIndex = 23;
             this.label2.Text = "Vos locations";
-            // 
-            // listView2
-            // 
-            this.listView2.FullRowSelect = true;
-            this.listView2.GridLines = true;
-            this.listView2.HideSelection = false;
-            this.listView2.Location = new System.Drawing.Point(50, 110);
-            this.listView2.Name = "listView2";
-            this.listView2.Size = new System.Drawing.Size(694, 251);
-            this.listView2.TabIndex = 21;
-            this.listView2.UseCompatibleStateImageBehavior = false;
             // 
             // btnRetour
             // 
@@ -329,15 +497,16 @@
             this.btnRetour.UseVisualStyleBackColor = true;
             this.btnRetour.Click += new System.EventHandler(this.btnRetour_Click_1);
             // 
-            // btnModifier
+            // bntActualiserChambre
             // 
-            this.btnModifier.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnModifier.Location = new System.Drawing.Point(229, 383);
-            this.btnModifier.Name = "btnModifier";
-            this.btnModifier.Size = new System.Drawing.Size(158, 36);
-            this.btnModifier.TabIndex = 28;
-            this.btnModifier.Text = "Modifier la location";
-            this.btnModifier.UseVisualStyleBackColor = true;
+            this.bntActualiserChambre.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bntActualiserChambre.Location = new System.Drawing.Point(239, 380);
+            this.bntActualiserChambre.Name = "bntActualiserChambre";
+            this.bntActualiserChambre.Size = new System.Drawing.Size(167, 36);
+            this.bntActualiserChambre.TabIndex = 31;
+            this.bntActualiserChambre.Text = "Actualiser";
+            this.bntActualiserChambre.UseVisualStyleBackColor = true;
+            this.bntActualiserChambre.Click += new System.EventHandler(this.bntActualiserChambre_Click);
             // 
             // GestionLocations
             // 
@@ -350,6 +519,7 @@
             this.Name = "GestionLocations";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Gestion des locations";
+            this.Load += new System.EventHandler(this.GestionLocations_Load);
             this.tabCtrlLocations.ResumeLayout(false);
             this.tabChambres.ResumeLayout(false);
             this.tabChambres.PerformLayout();
@@ -371,7 +541,7 @@
         private System.Windows.Forms.RadioButton rbtnAZ;
         private System.Windows.Forms.Button btnTrier;
         private System.Windows.Forms.Button btnChercher;
-        private System.Windows.Forms.Button btnLouer;
+        private System.Windows.Forms.Button btnReserver;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnRetour;
         private System.Windows.Forms.ListView listViewChambres;
@@ -381,7 +551,6 @@
         private System.Windows.Forms.Button btnTrierVosLocation;
         private System.Windows.Forms.Button btnAnnuler;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ListView listView2;
         private System.Windows.Forms.TabPage tabActivites;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cmbHeures;
@@ -389,5 +558,26 @@
         private System.Windows.Forms.ComboBox cmbActivite;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnModifier;
+        private System.Windows.Forms.ColumnHeader columnChambre;
+        private System.Windows.Forms.ColumnHeader columnNbLitAdulte;
+        private System.Windows.Forms.ColumnHeader columnNbLitEnfant;
+        private System.Windows.Forms.ColumnHeader columnPrixParJour;
+        private System.Windows.Forms.ColumnHeader columnChambreVIP;
+        private System.Windows.Forms.ColumnHeader columnDisponibilite;
+        private System.Windows.Forms.ColumnHeader columnLocataire;
+        private System.Windows.Forms.ListView listViewChambreClient;
+        private System.Windows.Forms.ColumnHeader columnClient;
+        private System.Windows.Forms.ColumnHeader columnChambreRéserver;
+        private System.Windows.Forms.ColumnHeader columnDateDébut;
+        private System.Windows.Forms.ColumnHeader columnDateFin;
+        private System.Windows.Forms.ColumnHeader columnPrixTotal;
+        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnSalle;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.Button btnActualiser;
+        private System.Windows.Forms.Button bntActualiserChambre;
     }
 }

@@ -7,11 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ProjetFinal.Classes;
+using System.Data.SqlClient;
+using System.Text.RegularExpressions;
+using static System.Net.Mime.MediaTypeNames;
+using System.Security.Cryptography.X509Certificates;
 
 namespace ProjetFinal.Forms
 {
-    public partial class GestionCompte : Form
+    public partial class GestionCompte : Form, ICalculPrix
     {
+        SqlConnection cnx = new SqlConnection("Data Source=DESKTOP-GFQ1SUE\\SQLEXPRESS02;Initial Catalog=HotelLune;Integrated Security=True");
+
         public GestionCompte()
         {
             InitializeComponent();
@@ -24,6 +31,7 @@ namespace ProjetFinal.Forms
 
         private void btnVoirMdp_Click(object sender, EventArgs e)
         {
+            //montrer le mot de passe
             if (txtMdpConnection.UseSystemPasswordChar == true)
             {
                 txtMdpConnection.UseSystemPasswordChar = false;
@@ -33,6 +41,106 @@ namespace ProjetFinal.Forms
             {
                 txtMdpConnection.UseSystemPasswordChar = true;
             }
+        }
+
+        private void GestionCompte_Load(object sender, EventArgs e)
+        {
+            cnx.Open();
+            //Mettre la valeur du nom d'utilisateur
+            txtNomConnection.Text = VerificationConnection.Utilisateur;
+
+            //Mettre la valeur du mot de passe (en cherchant dans la base de donné)
+            SqlCommand verifConnection = new SqlCommand("Select motDePasse from Client where (nomUtilisateur='"
+                + VerificationConnection.Utilisateur + "')", cnx);
+            SqlDataReader motDePasse = verifConnection.ExecuteReader();
+
+            while (motDePasse.Read())
+            {
+                txtMdpConnection.Text = motDePasse[0].ToString();
+            }
+            
+            cnx.Close();
+        }
+
+        private void btnModifierMdp_Click(object sender, EventArgs e)
+        {
+            //Initialisé le Regex du mot de passe 
+            string pattern = @"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$"; //Regex qui demande 5 caractères, minumum 1 lettre et 1 chiffre
+            Regex rgMdp = new Regex(pattern);
+
+            if (MessageBox.Show("Êtes-vous certain de vouloir changer votre mot de passe?", "Attention", MessageBoxButtons.YesNo) == DialogResult.Yes) { 
+                //Vérifier que le mot de passe Match le Regex
+                if (rgMdp.Match(txtMdpConnection.Text).Success == false)
+                {
+                    MessageBox.Show("Erreur! Votre mot de passe doit avoir au moins 5 caractères, au moins 1 lettre et 1 chiffre", "Erreur!",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                //Changer le mot de passe
+                else
+                {
+                    cnx.Open();
+                    SqlCommand changerMdp = new SqlCommand("update Client set motDePasse='" + txtMdpConnection.Text + "' where (nomUtilisateur='" + VerificationConnection.Utilisateur + "')", cnx);
+
+                    changerMdp.ExecuteNonQuery();
+
+                    if(VerificationConnection.VIP == true)
+                    {
+                        SqlCommand changerMdpVIP = new SqlCommand("update ClientVIP set motDePasse='" + txtMdpConnection.Text + "' where (nomUtilisateur='" + VerificationConnection.Utilisateur + "')", cnx);
+                        changerMdpVIP.ExecuteNonQuery();
+                    }
+                    
+                    MessageBox.Show("Le mot de passe a été modifié", "Succès", 
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    cnx.Close();
+                }
+            }
+        }
+
+        private void btnSupprimerCompte_Click(object sender, EventArgs e)
+        {
+            //Demander de confirmer s'ils veulent supprimer leur comtpe et qu'il est connecté
+            if (MessageBox.Show("Êtes-vous certain de vouloir supprimer votre compte?", "Attention", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                cnx.Open();
+                
+
+                //Vérification de si Il a encore une réservation, ne pas supprimer compte
+                try
+                {
+                    if (VerificationConnection.VIP == true)
+                    {
+                        SqlCommand SupprimerVIP = new SqlCommand("delete from ClientVIP where (nomUtilisateur='" + txtNomConnection.Text + "')", cnx);
+                        SupprimerVIP.ExecuteNonQuery();
+                    }
+                    SqlCommand Supprimer = new SqlCommand("delete from Client where (nomUtilisateur='" + txtNomConnection.Text + "')", cnx);
+                    Supprimer.ExecuteNonQuery();
+                    cnx.Close();
+                    
+                    //Réintialiser les valeurs
+                    txtMdpConnection.Text = "";
+                    txtNomConnection.Text = "";
+                    VerificationConnection.Utilisateur = null;
+                    VerificationConnection.Connecter = false;
+
+                    MessageBox.Show("Votre compte a été supprimer", "Succès",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Close();
+                }
+                catch
+                {
+                    MessageBox.Show("Vous ne pouvez pas supprimer votre compte si vous avez une réservation de faite", "Erreur!",
+                                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void btnCalculer_Click(object sender, EventArgs e)
+        {
+             void CalculPrix()
+             {
+                
+             }
         }
     }
 }

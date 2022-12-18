@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProjetFinal.Classes
 {
-    abstract class ClientVIP: Client
+    public class ClientVIP: Client
     {
         //Attributs privés
         private string pnomUtilisateur;
@@ -14,18 +14,6 @@ namespace ProjetFinal.Classes
         private bool pvip;
 
         //Propriétés des attributs privées
-        public string NomUtilisateur
-        {
-            get { return pnomUtilisateur; }
-            set { pnomUtilisateur = value; }
-        }
-
-        public string MotDePasse
-        {
-            get { return pmotDePasse; }
-            set { pmotDePasse = value; }
-        }
-
         public bool Vip
         {
             get { return pvip; }

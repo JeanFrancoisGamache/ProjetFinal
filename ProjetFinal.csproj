@@ -52,6 +52,8 @@
     <Compile Include="Classes\Activite.cs" />
     <Compile Include="Classes\Client.cs" />
     <Compile Include="Classes\ClientVIP.cs" />
+    <Compile Include="Classes\ReservationChambre.cs" />
+    <Compile Include="Classes\VerificationConnection.cs" />
     <Compile Include="Forms\GestionLocations.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -70,11 +72,24 @@
     <Compile Include="Forms\GestionCompte.Designer.cs">
       <DependentUpon>GestionCompte.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ICalculPrix.cs" />
     <Compile Include="Forms\Menu.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Menu.Designer.cs">
       <DependentUpon>Menu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Reservation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Reservation.Designer.cs">
+      <DependentUpon>Reservation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Modifier.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Modifier.Designer.cs">
+      <DependentUpon>Modifier.cs</DependentUpon>
     </Compile>
     <Compile Include="HotelLuneDataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -94,6 +109,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Reservation.resx">
+      <DependentUpon>Reservation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Modifier.resx">
+      <DependentUpon>Modifier.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

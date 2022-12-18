@@ -78,6 +78,7 @@
             this.btnSupprimerCompte.TabIndex = 9;
             this.btnSupprimerCompte.Text = "Supprimer son compte";
             this.btnSupprimerCompte.UseVisualStyleBackColor = true;
+            this.btnSupprimerCompte.Click += new System.EventHandler(this.btnSupprimerCompte_Click);
             // 
             // txtNomConnection
             // 
@@ -166,6 +167,7 @@
             this.btnCalculer.TabIndex = 22;
             this.btnCalculer.Text = "Calculer";
             this.btnCalculer.UseVisualStyleBackColor = true;
+            this.btnCalculer.Click += new System.EventHandler(this.btnCalculer_Click);
             // 
             // label3
             // 
@@ -196,6 +198,7 @@
             this.btnModifierMdp.TabIndex = 25;
             this.btnModifierMdp.Text = "Modifier Mot de Passe";
             this.btnModifierMdp.UseVisualStyleBackColor = true;
+            this.btnModifierMdp.Click += new System.EventHandler(this.btnModifierMdp_Click);
             // 
             // GestionCompte
             // 
@@ -222,6 +225,7 @@
             this.Name = "GestionCompte";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "GestionCompte";
+            this.Load += new System.EventHandler(this.GestionCompte_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericNbPersonne)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

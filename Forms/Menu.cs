@@ -31,14 +31,33 @@ namespace ProjetFinal
 
         private void btnAfficher_Click(object sender, EventArgs e)
         {
-            GestionLocations formAfficherChambre = new GestionLocations();
-            formAfficherChambre.ShowDialog();
+            if (VerificationConnection.Connecter == true)
+            {
+                GestionLocations formAfficherChambre = new GestionLocations();
+                formAfficherChambre.ShowDialog();
+            }
+
+            else
+            {
+                MessageBox.Show("Vous devez être connecté pour accéder à cette page.", "Erreur!",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnCompte_Click(object sender, EventArgs e)
         {
-            GestionCompte formGestionCompte = new GestionCompte();
-            formGestionCompte.ShowDialog();
+
+            if (VerificationConnection.Connecter == true)
+            {
+                GestionCompte formGestionCompte = new GestionCompte();
+                formGestionCompte.ShowDialog();
+            }
+            
+            else
+            {
+                MessageBox.Show("Vous devez être connecté pour accéder à cette page.", "Erreur!",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnConnecter_Click(object sender, EventArgs e)
@@ -49,6 +68,7 @@ namespace ProjetFinal
 
         private void FormMenu_Load(object sender, EventArgs e)
         {
+            //Tester la connection à la base de donné
             //Configurer la connection avec la base de données
             String connectionString = ConfigurationManager.ConnectionStrings["cnx"].ConnectionString;
 
@@ -67,7 +87,7 @@ namespace ProjetFinal
 
         private void btnQuitter_Click(object sender, EventArgs e)
         {
-
+            //Fermer l'app
             this.Close();
         }
     }
