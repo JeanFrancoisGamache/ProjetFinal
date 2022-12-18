@@ -49,7 +49,5 @@ namespace ProjetFinal.Classes
             this.NbLitEnfant = NbLitEnfant;
             this.ChambreVip = ChambreVip;
         }
-
-
     }
 }

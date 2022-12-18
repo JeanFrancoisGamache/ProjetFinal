@@ -65,14 +65,12 @@ namespace ProjetFinal.Forms
                     dateTimeRetour.Value.ToString() + "', " + prix + ")", cnx); ;
 
                 AjoutReservation.ExecuteNonQuery();
-                Console.WriteLine("test333");
 
                 //Modifier la description de la chambre pour dire qu'elle est réservé
                 SqlCommand ModifChambre = new SqlCommand("update Chambre set disponibilite = 'Réservé', locataire = '" + VerificationConnection.Client.Client
                     + "' where (NumeroChambre = '" + VerificationConnection.Client.Chambre + "')", cnx);
 
                 ModifChambre.ExecuteNonQuery();
-                Console.WriteLine("test444");
 
                 cnx.Close();
                 this.Close();

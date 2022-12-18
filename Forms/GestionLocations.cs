@@ -84,6 +84,47 @@ namespace ProjetFinal.Forms
             }
 
             cnx.Close();
+
+            //Mettres les activités dans la liste d'activités
+            cnx.Open();
+            SqlCommand AjoutActivite = new SqlCommand("select Type from Activites", cnx);
+            SqlDataReader reader = AjoutActivite.ExecuteReader();
+
+            while (reader.Read())
+            {
+                cmbActivite.Items.Add(reader[0].ToString());
+            }
+            cmbHeures.Items.Add("9 heure");
+            cmbHeures.Items.Add("10 heure");
+            cmbHeures.Items.Add("11 heure");
+            cmbHeures.Items.Add("12 heure");
+            cmbHeures.Items.Add("13 heure");
+            cmbHeures.Items.Add("14 heure");
+            cmbHeures.Items.Add("15 heure");
+            cnx.Close();
+
+            //Loader toutes les activités du client
+            //Prendre chaque items de la base de donné et l'ajouter à une table de donné c#
+            SqlCommand AjoutActiv = new SqlCommand("select * from ClientActivites where (nomUtilisateur = '" + VerificationConnection.Utilisateur + "')", cnx);
+            SqlDataAdapter Adapter = new SqlDataAdapter(AjoutActiv);
+            DataTable datatable2 = new DataTable();
+            Adapter.Fill(datatable2); //Source: https://youtu.be/jRV5HPE6fW8
+
+            //Pour chaque Row, ajout de l'item de notre DataTable
+            foreach (DataRow row in datatable2.Rows)
+            {
+                ListViewItem activite = new ListViewItem(row[0].ToString());
+                for (int index = 1; index < datatable2.Columns.Count; index++)
+                {
+                    activite.SubItems.Add(row[index].ToString());
+                }
+                listViewActivite.Items.Add(activite);
+            }
+            cmbActivite.SelectedIndex = 0;
+            cmbHeures.SelectedIndex = 0;
+
+            cnx.Close();
+
         }
 
         private void btnTrier_Click(object sender, EventArgs e)
@@ -208,7 +249,6 @@ namespace ProjetFinal.Forms
                     Reservation modifier = new Reservation();
                     modifier.ShowDialog(this);
 
-
                     cnx.Close();
                 }
             }
@@ -310,6 +350,77 @@ namespace ProjetFinal.Forms
                 listViewChambres.Items.Add(chambre);
             }
             cnx.Close();
+        }
+
+        private void btnAjouterr_Click(object sender, EventArgs e)
+        {
+            int prix = 0;
+            string salle = "";
+            cnx.Open();
+            SqlCommand DonneeActivite = new SqlCommand("select * from Activites where (Type = '" + cmbActivite.Text + "')", cnx);
+            SqlDataReader read = DonneeActivite.ExecuteReader();
+            
+            while (read.Read())
+            {
+                salle = read.GetString(0);
+                prix = read.GetInt32(2);
+            }
+            cnx.Close();
+
+
+            cnx.Open();
+            SqlCommand ajoutActivite = new SqlCommand("insert into ClientActivites(nomUtilisateur, Salle, Type, heure, prix) values('" 
+                + VerificationConnection.Utilisateur + "', '" + salle + "', '" + cmbActivite.Text + "','" + cmbHeures.Text + "', '" + prix + "')", cnx);
+            ajoutActivite.ExecuteNonQuery();
+            cnx.Close();
+
+            listViewActivite.Items.Clear(); //Réinitialisé les items
+            //Prendre chaque items de la base de donné et l'ajouter à une table de donné c#
+            SqlCommand AjoutListeView = new SqlCommand("select * from ClientActivites", cnx);
+            SqlDataAdapter AjoutDataAdapter = new SqlDataAdapter(AjoutListeView);
+            DataTable dt = new DataTable();
+            AjoutDataAdapter.Fill(dt); //Source: https://youtu.be/jRV5HPE6fW8
+
+            //Pour chaque Row, ajout de l'item de notre DataTable
+            foreach (DataRow row in dt.Rows)
+            {
+                ListViewItem activite = new ListViewItem(row[0].ToString());
+                for (int index = 1; index < dt.Columns.Count; index++)
+                {
+                    activite.SubItems.Add(row[index].ToString());
+                }
+                listViewActivite.Items.Add(activite);
+            }
+            cnx.Close();
+        }
+
+        private void btnAnnulerAct_Click(object sender, EventArgs e)
+        {
+            //Demandé à l'utilisateur s'il veut réellement supprimer cette réservation
+            try
+            {
+                if (MessageBox.Show("Êtes-vous certain de vouloir annuler votre réservation à la salle " + listViewActivite.SelectedItems[0].SubItems[1].Text + "?", "Attention", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    cnx.Open();
+
+                    //Enlever l'item dans ClientActivite
+                    SqlCommand EnleverReservation = new SqlCommand("delete from ClientActivites where (nomUtilisateur = '"
+                        + listViewActivite.SelectedItems[0].SubItems[0].Text + "' and salle ='" + listViewActivite.SelectedItems[0].SubItems[1].Text
+                        + "')", cnx);
+
+
+                    //execute commandes
+                    EnleverReservation.ExecuteNonQuery();
+                    MessageBox.Show("Votre réservation a été annulé,", "Succès!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    listViewActivite.SelectedItems[0].Remove();
+                    cnx.Close();
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Vous devez sélectionner une réservation", "Erreur!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
     }
 }

@@ -8,6 +8,6 @@ namespace ProjetFinal.Forms
 {
     internal interface ICalculPrix
     {
-        void CalculPrix();
+        void CalculPrix(int nbPersonne);
     }
 }

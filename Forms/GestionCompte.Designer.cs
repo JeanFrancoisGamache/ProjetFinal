@@ -45,7 +45,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.btnModifierMdp = new System.Windows.Forms.Button();
+            this.grpBoxStats = new System.Windows.Forms.GroupBox();
+            this.lblStatistiques = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericNbPersonne)).BeginInit();
+            this.grpBoxStats.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblTitre
@@ -154,9 +157,24 @@
             // numericNbPersonne
             // 
             this.numericNbPersonne.Location = new System.Drawing.Point(471, 124);
+            this.numericNbPersonne.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numericNbPersonne.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numericNbPersonne.Name = "numericNbPersonne";
             this.numericNbPersonne.Size = new System.Drawing.Size(120, 20);
             this.numericNbPersonne.TabIndex = 21;
+            this.numericNbPersonne.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // btnCalculer
             // 
@@ -200,11 +218,32 @@
             this.btnModifierMdp.UseVisualStyleBackColor = true;
             this.btnModifierMdp.Click += new System.EventHandler(this.btnModifierMdp_Click);
             // 
+            // grpBoxStats
+            // 
+            this.grpBoxStats.Controls.Add(this.lblStatistiques);
+            this.grpBoxStats.Location = new System.Drawing.Point(16, 305);
+            this.grpBoxStats.Name = "grpBoxStats";
+            this.grpBoxStats.Size = new System.Drawing.Size(608, 133);
+            this.grpBoxStats.TabIndex = 26;
+            this.grpBoxStats.TabStop = false;
+            this.grpBoxStats.Text = "Statistiques";
+            // 
+            // lblStatistiques
+            // 
+            this.lblStatistiques.AutoSize = true;
+            this.lblStatistiques.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStatistiques.Location = new System.Drawing.Point(18, 35);
+            this.lblStatistiques.Name = "lblStatistiques";
+            this.lblStatistiques.Size = new System.Drawing.Size(26, 18);
+            this.lblStatistiques.TabIndex = 0;
+            this.lblStatistiques.Text = "zz";
+            // 
             // GestionCompte
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.grpBoxStats);
             this.Controls.Add(this.btnModifierMdp);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -227,6 +266,8 @@
             this.Text = "GestionCompte";
             this.Load += new System.EventHandler(this.GestionCompte_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericNbPersonne)).EndInit();
+            this.grpBoxStats.ResumeLayout(false);
+            this.grpBoxStats.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -250,5 +291,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnModifierMdp;
+        private System.Windows.Forms.GroupBox grpBoxStats;
+        private System.Windows.Forms.Label lblStatistiques;
     }
 }

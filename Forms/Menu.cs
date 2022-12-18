@@ -33,8 +33,17 @@ namespace ProjetFinal
         {
             if (VerificationConnection.Connecter == true)
             {
-                GestionLocations formAfficherChambre = new GestionLocations();
-                formAfficherChambre.ShowDialog();
+                //Vérifier qu'il a juste une réservation pour cette activité
+                try
+                {
+                    GestionLocations formAfficherChambre = new GestionLocations();
+                    formAfficherChambre.ShowDialog();
+                }
+                catch
+                {
+                    MessageBox.Show("Vous ne pouvez pas avoir plus qu'une réservation pour cette activité.", "Erreur!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+               
             }
 
             else

@@ -12,6 +12,7 @@ using System.Data.SqlClient;
 using System.Text.RegularExpressions;
 using static System.Net.Mime.MediaTypeNames;
 using System.Security.Cryptography.X509Certificates;
+using System.Runtime.CompilerServices;
 
 namespace ProjetFinal.Forms
 {
@@ -45,6 +46,29 @@ namespace ProjetFinal.Forms
 
         private void GestionCompte_Load(object sender, EventArgs e)
         {
+            //Afficher l'affichage des statistique si le client est VIP
+            if (VerificationConnection.VIP = true )
+            {
+                cnx.Open();
+                grpBoxStats.Show();
+                //Calculer la moyenne du nombre de jour rester à l'hôtel
+                SqlCommand moyenne = new SqlCommand("SELECT AVG(DATEDIFF(d, dateDebut, dateRetour)) FROM ClientChambre", cnx);
+                SqlDataReader reader = moyenne.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    lblStatistiques.Text = "La moyenne du nombre de journée qu'une chambre est réserver est: " + reader[0].ToString() + " jours.";
+                }
+                cnx.Close();
+            }
+
+            //Si le client n'est pas VIP, ne pas afficher les statistiques
+            else
+            {
+                grpBoxStats.Hide();
+            }
+
+
             cnx.Open();
             //Mettre la valeur du nom d'utilisateur
             txtNomConnection.Text = VerificationConnection.Utilisateur;
@@ -59,6 +83,67 @@ namespace ProjetFinal.Forms
                 txtMdpConnection.Text = motDePasse[0].ToString();
             }
             
+            cnx.Close();
+
+
+            //Calculer le solde et Afficher le solde
+            //Solde des activités
+            cnx.Open();
+            int SoldeActivite = 0;
+
+            SqlCommand cmdSoldeActivite = new SqlCommand("select sum(prix) from ClientActivites where (nomUtilisateur='" + VerificationConnection.Utilisateur + "')", cnx);
+            SqlDataReader AfficherSoldeAct = cmdSoldeActivite.ExecuteReader();
+            while (AfficherSoldeAct.Read())
+            {
+                //S'il y a pas de donné, prix = 0
+                try
+                {
+                    SoldeActivite = AfficherSoldeAct.GetInt32(0);
+
+                }
+                catch
+                {
+                    SoldeActivite = 0; 
+                }
+
+            }
+
+            cnx.Close();
+
+            //Solde des chambres
+            cnx.Open();
+
+            SqlCommand Solde = new SqlCommand("select sum(prix) from ClientChambre where (nomUtilisateur='" + VerificationConnection.Utilisateur + "')", cnx);
+            SqlDataReader AfficherSolde = Solde.ExecuteReader();
+            while (AfficherSolde.Read())
+            {
+                //Si il est VIP rajouté les frais de 100$
+                if (VerificationConnection.VIP == true)
+                {
+                    try
+                    {
+                        txtSolde.Text = (Int32.Parse(AfficherSolde[0].ToString()) + 100 + SoldeActivite).ToString() ; //Ajouter 100$ et afficher
+                    }
+                    //Si il y a aucune réservation afficher 100$¸ puisqu'il est VIP
+                    catch
+                    {
+                        txtSolde.Text = (100 + SoldeActivite).ToString();
+                    }
+                }
+                //Si il n'est pas VIP ne pas ajouté 100$
+                else
+                {
+                    try
+                    {
+                        txtSolde.Text = (Int32.Parse(AfficherSolde[0].ToString()) + SoldeActivite).ToString();
+                    }
+                    //Si il a aucune réservation
+                    catch
+                    {
+                        txtSolde.Text = (0 + SoldeActivite).ToString();
+                    }
+                }
+            }
             cnx.Close();
         }
 
@@ -137,10 +222,16 @@ namespace ProjetFinal.Forms
 
         private void btnCalculer_Click(object sender, EventArgs e)
         {
-             void CalculPrix()
-             {
-                
-             }
+            //Envoie à la fonction d'interface Calculer prix le nombre de personne
+            CalculPrix(Int32.Parse(numericNbPersonne.Value.ToString()));
+        }
+
+        public void CalculPrix(int nbPersonne)
+        {
+            
+            int PrixParPersonne = Int32.Parse(txtSolde.Text) / nbPersonne;
+            MessageBox.Show("Pour " + nbPersonne + " personnes, ça va coûter " + PrixParPersonne + " $ par personne.", "Information",
+                                                MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }
