@@ -5,6 +5,10 @@ VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjetFinal", "ProjetFinal.csproj", "{F906DF2C-6735-4E46-94F2-29E77162608F}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTest.Tests", "..\UnitTest.Tests\UnitTest.Tests.csproj", "{D3AD60AC-58B4-4DF6-A300-718544D7C1A3}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup_HotelLune", "..\Setup_HotelLune\Setup_HotelLune.vdproj", "{B1AF7254-48DB-4E75-828E-69FF3297606A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,12 @@ Global
 		{F906DF2C-6735-4E46-94F2-29E77162608F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F906DF2C-6735-4E46-94F2-29E77162608F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F906DF2C-6735-4E46-94F2-29E77162608F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3AD60AC-58B4-4DF6-A300-718544D7C1A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3AD60AC-58B4-4DF6-A300-718544D7C1A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3AD60AC-58B4-4DF6-A300-718544D7C1A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3AD60AC-58B4-4DF6-A300-718544D7C1A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1AF7254-48DB-4E75-828E-69FF3297606A}.Debug|Any CPU.ActiveCfg = Debug
+		{B1AF7254-48DB-4E75-828E-69FF3297606A}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

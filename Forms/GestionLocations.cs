@@ -42,7 +42,7 @@ namespace ProjetFinal.Forms
         {
             this.Close();
         }
-
+        /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// ///
         private void GestionLocations_Load(object sender, EventArgs e)
         {
 
@@ -65,7 +65,7 @@ namespace ProjetFinal.Forms
                 }
                 listViewChambres.Items.Add(chambre);
             }
-
+            /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// ///
             //Mettre toutes les chambres loués par l'utilisateur
             SqlCommand AjoutListeViewClient = new SqlCommand("select * from ClientChambre where (nomUtilisateur='" + VerificationConnection.Utilisateur + "')", cnx);
             SqlDataAdapter AjoutDataAdapterClient = new SqlDataAdapter(AjoutListeViewClient);
@@ -84,7 +84,7 @@ namespace ProjetFinal.Forms
             }
 
             cnx.Close();
-
+            /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// ///
             //Mettres les activités dans la liste d'activités
             cnx.Open();
             SqlCommand AjoutActivite = new SqlCommand("select Type from Activites", cnx);
@@ -102,7 +102,7 @@ namespace ProjetFinal.Forms
             cmbHeures.Items.Add("14 heure");
             cmbHeures.Items.Add("15 heure");
             cnx.Close();
-
+            /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// ///
             //Loader toutes les activités du client
             //Prendre chaque items de la base de donné et l'ajouter à une table de donné c#
             SqlCommand AjoutActiv = new SqlCommand("select * from ClientActivites where (nomUtilisateur = '" + VerificationConnection.Utilisateur + "')", cnx);
@@ -126,7 +126,7 @@ namespace ProjetFinal.Forms
             cnx.Close();
 
         }
-
+        /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// ///
         private void btnTrier_Click(object sender, EventArgs e)
         {
 
@@ -135,7 +135,7 @@ namespace ProjetFinal.Forms
             
             listViewChambres.Sort();
         }
-
+        /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// ///
         private void btnChercher_Click(object sender, EventArgs e)
         {
             cnx.Open();
@@ -188,7 +188,7 @@ namespace ProjetFinal.Forms
             }
             cnx.Close();
         }
-
+        /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// ///
         private void btnAnnuler_Click(object sender, EventArgs e)
         {
             //Demandé à l'utilisateur s'il veut réellement supprimer cette réservation
@@ -222,7 +222,7 @@ namespace ProjetFinal.Forms
            }
 
         }
-
+        /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// ///
         private void btnModifier_Click(object sender, EventArgs e)
         {
             try
@@ -257,7 +257,7 @@ namespace ProjetFinal.Forms
                 MessageBox.Show("Vous devez sélectionner une réservation", "Erreur!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
+        /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// ///
         private void btnActualiser_Click(object sender, EventArgs e)
         {
             cnx.Open();
@@ -282,7 +282,7 @@ namespace ProjetFinal.Forms
             }
             cnx.Close();
         }
-
+        /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// ///
         private void btnReserver_Click(object sender, EventArgs e)
         {
             try
@@ -326,7 +326,7 @@ namespace ProjetFinal.Forms
                 MessageBox.Show("Vous devez sélectionner une chambre", "Erreur!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
+        /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// ///
         private void bntActualiserChambre_Click(object sender, EventArgs e)
         {
             listViewChambres.Items.Clear();
@@ -351,7 +351,7 @@ namespace ProjetFinal.Forms
             }
             cnx.Close();
         }
-
+        /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// ///
         private void btnAjouterr_Click(object sender, EventArgs e)
         {
             int prix = 0;
@@ -367,7 +367,7 @@ namespace ProjetFinal.Forms
             }
             cnx.Close();
 
-
+            /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// ///
             cnx.Open();
             SqlCommand ajoutActivite = new SqlCommand("insert into ClientActivites(nomUtilisateur, Salle, Type, heure, prix) values('" 
                 + VerificationConnection.Utilisateur + "', '" + salle + "', '" + cmbActivite.Text + "','" + cmbHeures.Text + "', '" + prix + "')", cnx);
@@ -376,7 +376,7 @@ namespace ProjetFinal.Forms
 
             listViewActivite.Items.Clear(); //Réinitialisé les items
             //Prendre chaque items de la base de donné et l'ajouter à une table de donné c#
-            SqlCommand AjoutListeView = new SqlCommand("select * from ClientActivites", cnx);
+            SqlCommand AjoutListeView = new SqlCommand("select * from ClientActivites where (nomUtilisateur = '" + VerificationConnection.Utilisateur + "')", cnx);
             SqlDataAdapter AjoutDataAdapter = new SqlDataAdapter(AjoutListeView);
             DataTable dt = new DataTable();
             AjoutDataAdapter.Fill(dt); //Source: https://youtu.be/jRV5HPE6fW8
@@ -393,7 +393,7 @@ namespace ProjetFinal.Forms
             }
             cnx.Close();
         }
-
+        /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// ///
         private void btnAnnulerAct_Click(object sender, EventArgs e)
         {
             //Demandé à l'utilisateur s'il veut réellement supprimer cette réservation
@@ -420,7 +420,6 @@ namespace ProjetFinal.Forms
             {
                 MessageBox.Show("Vous devez sélectionner une réservation", "Erreur!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
     }
 }

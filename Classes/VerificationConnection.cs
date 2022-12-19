@@ -16,5 +16,4 @@ namespace ProjetFinal.Classes
         //Attribut statique d'objet Client
         public static ReservationChambre Client;
     }
-
 }

@@ -31,9 +31,10 @@ namespace ProjetFinal.Forms
         {
             this.Close();
         }
-
+        /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// ///
         private void btnCreer_Click(object sender, EventArgs e)
         {
+
             cnx.Open();
             //Commande qui retourne 0 si il ne trouve pas l'utilisateur et 1 si il trouve l'utilisateur
             SqlCommand verifConnection = new SqlCommand("Select count(nomUtilisateur) from Client where (nomUtilisateur='" + txtNomCreer.Text + "')", cnx);
@@ -98,7 +99,7 @@ namespace ProjetFinal.Forms
             }
             cnx.Close();
         }
-
+        /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// ///
         private void btnConnection_Click(object sender, EventArgs e)
         {
             cnx.Open();
@@ -155,7 +156,7 @@ namespace ProjetFinal.Forms
                 cnx.Close();
             }
         }
-
+        /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// ///
         private void Connection_Load(object sender, EventArgs e)
         {
             //Vérifier si quelqu'un est connecté à l'application pour afficher les options disponibles.
@@ -173,7 +174,7 @@ namespace ProjetFinal.Forms
                 gbxDeconenction.Hide();
             }
         }
-
+        /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// ///
         private void btnDeconnection_Click(object sender, EventArgs e)
         {
             //Réinitialisé la classe statique pour dire qu'aucune personne est connecté

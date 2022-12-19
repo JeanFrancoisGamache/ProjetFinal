@@ -47,7 +47,7 @@ namespace ProjetFinal.Forms
         private void GestionCompte_Load(object sender, EventArgs e)
         {
             //Afficher l'affichage des statistique si le client est VIP
-            if (VerificationConnection.VIP = true )
+            if (VerificationConnection.VIP == true )
             {
                 cnx.Open();
                 grpBoxStats.Show();
